@@ -30,9 +30,6 @@ def digit_list(lst):
             final_lst[index] += ch
     return final_lst
 
-def remove_unmatched(value, index, lst):
-    return [number for number in lst if number[index] == value]
-
 def q1():
     with open('day 3\input.txt', 'r') as f:
         input = f.readlines()
@@ -51,49 +48,49 @@ def q1():
 
     return gamma * epsilon
 
-def q2():
+def filter_options_oxy(lst, index):
+
+    if len(lst) == 1:
+        return lst[0]
+
+    digit_list = [num[index] for num in lst]
+    digit = most_common(digit_list)
+    
+    new_list = list()
+    for number in lst:
+        if number[index] == digit:
+            new_list.append(number)
+    
+    return filter_options_oxy(new_list, index+1)
+
+
+def filter_options_co2(lst, index):
+
+    if len(lst) == 1:
+        return lst[0]
+    
+    digit_list = [num[index] for num in lst]
+    digit = least_common(digit_list)
+
+    new_list = list()
+    for number in lst:
+        if number[index] == digit:
+            new_list.append(number)
+    
+    return filter_options_co2(new_list, index+1)
+
+def q2_2():
     with open('day 3\input.txt', 'r') as f:
         input = f.readlines()
-    
-    list_per_digit = digit_list(input)
 
-    most_common_number = ''.join([most_common(digit) for digit in list_per_digit])
-    least_common_number = ''.join([least_common(digit) for digit in list_per_digit])
+    input = [line.strip() for line in input]
 
-    oxy, co2 = '', ''
-
-    biggest = [num.strip() for num in deepcopy(input)]
-    idx = 0
-    # get the first value
-    while len(biggest) > 1 and idx < 12:
-        dig = most_common(list_per_digit[idx])
-        survivors = list()
-        for num in biggest:
-            if num[idx] == dig:
-                survivors.append(num)
-        idx += 1
-        biggest = survivors
-        if len(biggest) == 1:
-            print(biggest)
-            oxy = biggest[0]
-
-    smallest = [num.strip() for num in deepcopy(input)]
-    idx = 0
-    # get the first value
-    while len(smallest) > 1 and idx < 12:
-        survivors = list()
-        for num in smallest:
-            if num[idx] == least_common_number[idx]:
-                survivors.append(num)
-        idx += 1
-        smallest = survivors
-        if len(smallest) == 1:
-            print(smallest)
-            co2 = smallest[0]
-
+    oxy = filter_options_oxy(input, 0)
+    co2 = filter_options_co2(input, 0)
     return oxy, co2
 
+    
 
 if __name__ == "__main__":
-    oxy, co2 = q2()
+    oxy, co2 = q2_2()
     print(bin_to_dec(oxy) * bin_to_dec(co2))
