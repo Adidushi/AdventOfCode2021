@@ -1,7 +1,7 @@
 def q1():
     with open('day 2\input.txt', 'r') as f:
         input = f.readlines()
-    
+
     h_pos = 0
     v_pos = 0
 
@@ -19,10 +19,11 @@ def q1():
     print(f'Final positions:\nVertical: {v_pos}\nHorizontal: {h_pos}')
     print(f'Final answer: {h_pos * v_pos}')
 
+
 def q2():
     with open('day 2\input.txt', 'r') as f:
         input = f.readlines()
-    
+
     h_pos = 0
     v_pos = 0
     aim = 0
@@ -41,7 +42,6 @@ def q2():
 
     print(f'Final positions:\nVertical: {v_pos}\nHorizontal: {h_pos}')
     print(f'Final answer: {h_pos * v_pos}')
-
 
 
 if __name__ == "__main__":

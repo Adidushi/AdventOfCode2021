@@ -19,12 +19,12 @@ class Board:
         for line in self.is_marked:
             if all(line):
                 return True
-        
+
         # Check verticals
         for line in list(zip(*self.is_marked)):
             if all(line):
                 return True
-        
+
         return False
 
     def calc_remaining(self):
@@ -34,9 +34,11 @@ class Board:
                 if not self.is_marked[i][j]:
                     score += int(self.nums[i][j])
         return score
-        
+
+
 def has_numbers(inputString):
-     return any(char.isdigit() for char in inputString)
+    return any(char.isdigit() for char in inputString)
+
 
 def check_last_board(boards, rolls):
     if len(boards) == 1:
@@ -52,13 +54,14 @@ def check_last_board(boards, rolls):
             next_boards.append(board)
     return check_last_board(next_boards, rolls[1:])
 
+
 def q1():
     with open('day 4\input.txt', 'r') as f:
         input = f.readlines()
 
     rolls = input[0].strip().split(',')
     input = input[2:]
-    
+
     boards = list()
     curr_board = list()
     for line in input:
@@ -67,21 +70,21 @@ def q1():
             curr_board = list()
         else:
             curr_board.append(line)
-    
+
     for num in rolls:
         for board in boards:
             board.mark_num(num)
             if board.is_winning():
                 return board.calc_remaining() * int(num)
-    
+
+
 def q2():
     with open('day 4\input.txt', 'r') as f:
         input = f.readlines()
 
-
     rolls = input[0].strip().split(',')
     input = input[2:]
-    
+
     boards = list()
     curr_board = list()
     for line in input:
@@ -93,6 +96,7 @@ def q2():
 
     return check_last_board(boards, rolls)
 
+
 def get_previous_num(num):
     with open('day 4\input.txt', 'r') as f:
         input = f.readlines()
@@ -101,6 +105,7 @@ def get_previous_num(num):
 
     index_of_num = rolls.index(num)
     return int(rolls[index_of_num-1])
+
 
 if __name__ == '__main__':
     print(f'Part 1: {q1()}')

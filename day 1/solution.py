@@ -12,6 +12,7 @@ def q1():
         previous_line = int(line)
     return counter
 
+
 def q2():
     with open('day 1\input.txt', 'r') as f:
         input = f.readlines()
@@ -32,6 +33,7 @@ def q2():
             counter += 1
         previous_sliding = current_sliding
     return counter
+
 
 if __name__ == "__main__":
     print(q1())

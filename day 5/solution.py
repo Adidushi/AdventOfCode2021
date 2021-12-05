@@ -1,10 +1,12 @@
 from dataclasses import dataclass
 import numpy as np
 
+
 @dataclass
 class Point:
     x: int
     y: int
+
 
 def line(pos1, pos2):
     x1, y1 = pos1.x, pos1.y
@@ -23,6 +25,7 @@ def line(pos1, pos2):
             y += dysign
             error -= 1
     yield Point(x1, y1)
+
 
 def parse_line(line):
     """Returns 2 Points
@@ -51,8 +54,9 @@ def get_occupied_straight_spaces(pos1, pos2):
             pos1.x, pos2.x = pos2.x, pos1.x
         for i in range(pos1.x, pos2.x+1):
             spaces.append(Point(i, pos1.y))
-        
+
     return spaces
+
 
 def get_occupied_all_spaces(pos1, pos2):
     """Returns list of Points
@@ -71,12 +75,14 @@ def get_occupied_all_spaces(pos1, pos2):
             spaces.append(Point(i, pos1.y))
     elif abs(pos1.x - pos2.x) == abs(pos1.y - pos2.y):
         spaces = line(pos1, pos2)
-        
+
     return spaces
+
 
 def add_occupied(spaces, matrix):
     for point in spaces:
         matrix[point.x, point.y] += 1
+
 
 def q1():
     with open('day 5\input.txt', 'r') as f:
@@ -88,9 +94,10 @@ def q1():
         pos1, pos2 = parse_line(line)
         spaces = get_occupied_straight_spaces(pos1, pos2)
         add_occupied(spaces, counter_matrix)
-    
+
     return (counter_matrix > 1).sum()
-    
+
+
 def q2():
     with open('day 5\input.txt', 'r') as f:
         input = f.readlines()
@@ -101,8 +108,9 @@ def q2():
         pos1, pos2 = parse_line(line)
         spaces = get_occupied_all_spaces(pos1, pos2)
         add_occupied(spaces, counter_matrix)
-    
+
     return (counter_matrix > 1).sum()
+
 
 def draw_q2():
     from PIL import Image, ImageDraw
@@ -116,11 +124,12 @@ def draw_q2():
 
     counter_matrix = np.zeros((1000, 1000), dtype=int)
     for index, line in enumerate(input):
-        print (index)
+        print(index)
         pos1, pos2 = parse_line(line)
-        
+
         if pos1.x == pos2.x or pos1.y == pos2.y or abs(pos1.x - pos2.x) == abs(pos1.y - pos2.y):
-            draw.line((pos1.x, pos1.y, pos2.x, pos2.y), fill=(random.randint(50, 200), random.randint(50, 200), random.randint(50, 200)))
+            draw.line((pos1.x, pos1.y, pos2.x, pos2.y), fill=(random.randint(
+                50, 200), random.randint(50, 200), random.randint(50, 200)))
 
         spaces = get_occupied_all_spaces(pos1, pos2)
         add_occupied(spaces, counter_matrix)
@@ -131,11 +140,12 @@ def draw_q2():
             draw_sect.point((x, y), fill=(51 * val, 51 * val, 51 * val))
 
         imgs = [sect, im]
-        min_shape = sorted( [(np.sum(i.size), i.size ) for i in imgs])[0][1]
-        imgs_comb = np.hstack( (np.asarray( i.resize(min_shape) ) for i in imgs ) )
-        imgs_comb = Image.fromarray( imgs_comb)
+        min_shape = sorted([(np.sum(i.size), i.size) for i in imgs])[0][1]
+        imgs_comb = np.hstack((np.asarray(i.resize(min_shape)) for i in imgs))
+        imgs_comb = Image.fromarray(imgs_comb)
         imgs_comb.save(f'day 5\comb\{index}.jpg')
     imgs_comb.show()
+
 
 if __name__ == '__main__':
     print(f'Part 1: {q1()}')
