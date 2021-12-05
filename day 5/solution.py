@@ -104,6 +104,40 @@ def q2():
     
     return (counter_matrix > 1).sum()
 
+def draw_q2():
+    from PIL import Image, ImageDraw
+    import random
+    with open('day 5\input.txt', 'r') as f:
+        input = f.readlines()
+    im = Image.new('RGB', (1000, 1000), (0, 0, 0))
+    sect = Image.new('RGB', (1000, 1000), (0, 0, 0))
+    draw = ImageDraw.Draw(im)
+    draw_sect = ImageDraw.Draw(sect)
+
+    counter_matrix = np.zeros((1000, 1000), dtype=int)
+    for index, line in enumerate(input):
+        print (index)
+        pos1, pos2 = parse_line(line)
+        
+        if pos1.x == pos2.x or pos1.y == pos2.y or abs(pos1.x - pos2.x) == abs(pos1.y - pos2.y):
+            draw.line((pos1.x, pos1.y, pos2.x, pos2.y), fill=(random.randint(50, 200), random.randint(50, 200), random.randint(50, 200)))
+
+        spaces = get_occupied_all_spaces(pos1, pos2)
+        add_occupied(spaces, counter_matrix)
+
+        for pos in zip(*np.where(counter_matrix > 1)):
+            x, y = pos
+            val = counter_matrix[x][y]
+            draw_sect.point((x, y), fill=(51 * val, 51 * val, 51 * val))
+
+        imgs = [sect, im]
+        min_shape = sorted( [(np.sum(i.size), i.size ) for i in imgs])[0][1]
+        imgs_comb = np.hstack( (np.asarray( i.resize(min_shape) ) for i in imgs ) )
+        imgs_comb = Image.fromarray( imgs_comb)
+        imgs_comb.save(f'day 5\comb\{index}.jpg')
+    imgs_comb.show()
+
 if __name__ == '__main__':
     print(f'Part 1: {q1()}')
     print(f'Part 2: {q2()}')
+    draw_q2()
