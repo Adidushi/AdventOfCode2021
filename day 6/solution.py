@@ -43,8 +43,7 @@ def better_algorithm(max_days):
     with open('day 6\input.txt', 'r') as f:
         input = f.readlines()
 
-    input = [int(num)
-             for num in input[0].strip().split(',')]  # list of numbers
+    input = [int(num) for num in input[0].strip().split(',')]
 
     counter = [0] * 9
     for fish in input:
