@@ -1,5 +1,5 @@
 def calc_consumption(distance):
-    return distance * (distance + 1) / 2
+    return int(distance * (distance + 1) / 2)
 
 def q1():
     with open('day 7\input.txt', 'r') as f:
