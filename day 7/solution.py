@@ -1,40 +1,24 @@
+from os.path import sep
+
 def calc_consumption(distance):
     return int(distance * (distance + 1) / 2)
 
 def q1():
-    with open('day 7\input.txt', 'r') as f:
-        input = f.read()
-    input = [int(num) for num in input.strip().split(',')]
+    with open(f'day 7{sep}input.txt', 'r') as f:
+        input = [int(num) for num in f.read().strip().split(',')]
 
-    # avg = round(sum(input) / len(input))
-
-    fuel_consumption = list()
-
-    for pos in range(min(input), max(input)):
-        fuel_consumption.append(sum([abs(num - pos) for num in input]))
-
-    return min(fuel_consumption)
-
-    # return sum(fuel_consumption)
-
-
-
-
-
+    return min([sum([abs(num - pos) for num in input]) for pos in range(min(input), max(input))])
     
 def q2():
-    with open('day 7\input.txt', 'r') as f:
-        input = f.read()
-    input = [int(num) for num in input.strip().split(',')]
+    with open(f'day 7{sep}input.txt', 'r') as f:
+        input = [int(num) for num in f.read().strip().split(',')]
 
-    fuel_consumption = list()
-
-    for pos in range(min(input), max(input)):
-        fuel_consumption.append(sum([calc_consumption(abs(num - pos)) for num in input]))
-
-    return min(fuel_consumption)
-
+    return min([sum([calc_consumption(abs(num - pos)) for num in input]) for pos in range(min(input), max(input))])
 
 if __name__ == '__main__':
+    from time import perf_counter
+    start_time = perf_counter()
     print(f'Part 1: {q1()}')
     print(f'Part 2: {q2()}')
+    end_time = perf_counter()
+    print(f'Time to run (s): {end_time - start_time}')
