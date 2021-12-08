@@ -5,13 +5,13 @@ def calc_consumption(distance):
 
 def q1():
     with open(f'day 7{sep}input.txt', 'r') as f:
-        input = [int(num) for num in f.read().strip().split(',')]
+        input = list(map(int, f.read().strip().split(',')))
 
     return min([sum([abs(num - pos) for num in input]) for pos in range(min(input), max(input))])
     
 def q2():
     with open(f'day 7{sep}input.txt', 'r') as f:
-        input = [int(num) for num in f.read().strip().split(',')]
+        input = list(map(int, f.read().strip().split(',')))
 
     return min([sum([calc_consumption(abs(num - pos)) for num in input]) for pos in range(min(input), max(input))])
 

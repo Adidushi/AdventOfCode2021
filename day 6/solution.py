@@ -29,10 +29,10 @@ def do_day(index, fish_list):
 
 def q1(max_days):
     with open('day 6\input.txt', 'r') as f:
-        input = f.readlines()
+        input = list(map(int, f.readlines()[0].strip().split(',')))
 
-    input = [int(num)
-             for num in input[0].strip().split(',')]  # list of numbers
+    # input = [int(num)
+    #          for num in input[0].strip().split(',')]  # list of numbers
 
     fish_list = [Fish(days) for days in input]
 
