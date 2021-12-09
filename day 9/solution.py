@@ -13,7 +13,7 @@ def q1():
         matrix = [list(map(int, line)) for line in f.splitlines()]
     return sum(1 + matrix[r][c] for r in range(len(matrix))
                for c in range(len(matrix[0]))
-               if all(matrix[r][c] < matrix[r1][c1] for r1, c1 in neighbors(matrix, r, c)))
+               if all(matrix[r][c] < matrix[cr][cc] for cr, cc in neighbors(matrix, r, c)))
 
 
 def search(matrix, r, c, visited):
