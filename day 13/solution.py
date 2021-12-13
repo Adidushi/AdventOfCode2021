@@ -63,8 +63,11 @@ def q2():
 
     ret_str = '\n'
 
-    for r in range(6):
-        for c in range(40):
+    max_c = max(map(lambda x: x[0], dots))+1
+    max_r = max(map(lambda x: x[1], dots))+1
+
+    for r in range(max_r):
+        for c in range(max_c):
             if (c, r) in dots:
                 ret_str += '█'
             else:
