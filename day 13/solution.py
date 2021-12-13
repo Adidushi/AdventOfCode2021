@@ -9,6 +9,7 @@ def flip_x(dots, line):
         dots.remove((c, r))
         dots.add((new_c, r))
 
+
 def flip_y(dots, line):
     to_change = set()
     for c, r in dots:
@@ -20,15 +21,16 @@ def flip_y(dots, line):
         dots.remove((c, r))
         dots.add((c, new_r))
 
+
 def q1():
     with open('day 13\input.txt', 'r') as f:
         input = f.read()
 
     dots, folds = input.split('\n\n')
-    
+
     dots = [pos.split(',') for pos in dots.splitlines()]
     folds = [cmd.split()[-1].split('=') for cmd in folds.splitlines()]
-    
+
     dots = set((int(c), int(r)) for c, r in dots)
 
     dir, line = folds[0]
@@ -41,16 +43,15 @@ def q1():
     return len(dots)
 
 
-    
 def q2():
     with open('day 13\input.txt', 'r') as f:
         input = f.read()
 
     dots, folds = input.split('\n\n')
-    
+
     dots = [pos.split(',') for pos in dots.splitlines()]
     folds = [cmd.split()[-1].split('=') for cmd in folds.splitlines()]
-    
+
     dots = set((int(c), int(r)) for c, r in dots)
 
     for dir, line in folds:
@@ -71,6 +72,7 @@ def q2():
         ret_str += '\n'
 
     return ret_str
+
 
 if __name__ == '__main__':
     print(f'Part 1: {q1()}')
