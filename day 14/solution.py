@@ -45,6 +45,12 @@ def apply_step2(chain, rules):
     return new_chain
 
 
+def add_pair(d, pair, amt=1):
+    for ch in pair:
+        d = add_if_not(d, ch, amt=amt)
+    return d
+
+
 def q1(days):
     with open('day 14\input.txt', 'r') as f:
         input = f.read().splitlines()
@@ -58,12 +64,6 @@ def q1(days):
     most_common = occ[0]
     least_common = occ[-1]
     return most_common[1] - least_common[1]
-
-
-def add_pair(d, pair, amt=1):
-    for ch in pair:
-        d = add_if_not(d, ch, amt=amt)
-    return d
 
 
 def q2(days):
