@@ -94,5 +94,11 @@ def q2(days):
 
 
 if __name__ == '__main__':
+    import time
+    st = time.perf_counter()
     print(f'Part 1: {q1(10)}')
+    pt1 = time.perf_counter()
     print(f'Part 2: {q2(40)}')
+    pt2 = time.perf_counter()
+
+    print(f'Time for exection:\nPart 1: {(pt1-st)*1000}ms\nPart 1: {(pt2-pt1)*1000}ms\nTotal: {(pt2-st)*1000}ms')
