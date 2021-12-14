@@ -1,5 +1,6 @@
 from collections import Counter
 
+
 def parse(input):
     chain = input[0]
 
