@@ -1,6 +1,7 @@
 from collections import Counter
 from copy import deepcopy
 
+
 def parse(input):
     chain = input[0]
 
@@ -8,8 +9,9 @@ def parse(input):
     for line in input[2:]:
         pre, post = line.split(' -> ')
         rules[pre] = post
-    
+
     return chain, rules
+
 
 def apply_step(chain, rules):
     new_chain = ''
@@ -20,10 +22,11 @@ def apply_step(chain, rules):
             new_chain += prev + rules[to_check]
         else:
             new_chain += prev
-    
+
     new_chain += chain[-1]
 
     return new_chain
+
 
 def add_if_not(d, v, amt=1):
     if v in d:
@@ -31,6 +34,7 @@ def add_if_not(d, v, amt=1):
     else:
         d[v] = amt
     return d
+
 
 def apply_step2(chain, rules):
     new_chain = dict()
@@ -41,12 +45,13 @@ def apply_step2(chain, rules):
             new_chain = add_if_not(new_chain, p, amt=occ)
     return new_chain
 
+
 def q1(days):
     with open('day 14\input.txt', 'r') as f:
         input = f.read().splitlines()
 
     chain, rules = parse(input)
-    
+
     for _ in range(days):
         chain = apply_step(chain, rules)
 
@@ -55,11 +60,13 @@ def q1(days):
     least_common = occ[-1]
     return most_common[1] - least_common[1]
 
+
 def add_pair(d, pair, amt=1):
     for ch in pair:
         d = add_if_not(d, ch, amt=amt)
     return d
-    
+
+
 def q2(days):
     with open('day 14\input.txt', 'r') as f:
         input = f.read().splitlines()
@@ -67,7 +74,6 @@ def q2(days):
     chain, rules = parse(input)
 
     first, last = chain[0], chain[-1]
-
 
     new_chain = dict()
 
