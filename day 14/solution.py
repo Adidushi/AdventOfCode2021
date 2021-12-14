@@ -90,7 +90,7 @@ def q2(days):
 
     max_ch = max(char_dict.items(), key=lambda x: x[1])[1]
     min_ch = min(char_dict.items(), key=lambda x: x[1])[1]
-    return (max_ch-min_ch)/2
+    return (max_ch-min_ch)//2
 
 
 if __name__ == '__main__':
