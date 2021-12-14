@@ -1,6 +1,4 @@
 from collections import Counter
-from copy import deepcopy
-
 
 def parse(input):
     chain = input[0]
