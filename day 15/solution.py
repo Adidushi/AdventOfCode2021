@@ -5,26 +5,26 @@ def neighbors(matrix, r, c):
         if 0 <= r < len(matrix) and 0 <= c < len(matrix[0]):
             yield (r, c)
 
-def shortest_distance(t, data):
+def shortest_distance(scale, matrix):
     heap = [(0, 0, 0)]
-    seen = {(0, 0)}
+    visited = {(0, 0)}
     while heap:
-        distance, x, y = heappop(heap)
-        if x == t * len(data) - 1 and y == t * len(data[0]) - 1:
+        distance, r, c = heappop(heap)
+        if r == scale * len(matrix) - 1 and c == scale * len(matrix[0]) - 1:
             return distance
 
         for dx, dy in ((0, 1), (0, -1), (1, 0), (-1, 0)):
-            x_, y_ = x + dx, y + dy
-            if x_ < 0 or y_ < 0 or x_ >= t * len(data) or y_ >= t * len(data):
+            n_r, n_c = r + dx, c + dy
+            if n_r < 0 or n_c < 0 or n_r >= scale * len(matrix) or n_c >= scale * len(matrix):
                 continue
 
-            a, am = divmod(x_, len(data))
-            b, bm = divmod(y_, len(data[0]))
-            n = ((data[am][bm] + a + b) - 1) % 9 + 1
+            a, am = divmod(n_r, len(matrix))
+            b, bm = divmod(n_c, len(matrix[0]))
+            n = ((matrix[am][bm] + a + b) - 1) % 9 + 1
 
-            if (x_, y_) not in seen:
-                seen.add((x_, y_))
-                heappush(heap, (distance + n, x_, y_))
+            if (n_r, n_c) not in visited:
+                visited.add((n_r, n_c))
+                heappush(heap, (distance + n, n_r, n_c))
 
 
 def q1():
