@@ -57,15 +57,34 @@ def q2(scanners):
                 farthest = max(farthest, distance)
     return farthest
 
+def visualize(scanners):
+    import plotly.express as px
+    import pandas as pd
+
+    data = list()
+    for scanner in scanners:
+        for point in (scanner.points + scanner.pos):
+            data.append((*point, 'Beacon'))
+        data.append((*scanner.pos, 'Scanner'))
+    data.append((0, 0, 0, 'Origin'))
+
+    data = pd.DataFrame(data, columns=['x', 'y', 'z', 'type'])
+    fig = px.scatter_3d(data, x='x', y='y', z='z', color='type', symbol='type')
+    fig.show()
+
 
 if __name__ == '__main__':
     from time import perf_counter as pc
+    
     st = pc()
     ans, scanners = q1()
     print(f'Part 1: {ans}')
     pt1 = pc()
     print(f'Part 2: {q2(scanners)}')
     pt2 = pc()
+
+    if input("Visualize?"):
+        visualize(scanners)
 
     print(f'Time for execution:\n\
             Part 1: {(pt1-st)*1000}ms\n\
