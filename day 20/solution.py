@@ -2,7 +2,7 @@ def parse(raw_input):
     enhancement = raw_input[0].replace('.', '0').replace('#', '1')
 
     image = [f'.{line}.' for line in raw_input[2:]]
-    blank_line = '.' * len(image[0])
+    blank_line = '.' * len(image[1])
     image.insert(0, blank_line)
     image.append(blank_line)
 
@@ -23,7 +23,7 @@ def get_value(input, r, c, iteration):
         for n_c in range(c-1, c+2):
             try:
                 value += input[n_r][n_c]
-            except:
+            except IndexError:
                 value += new_char
 
     return int(value, 2)
@@ -40,21 +40,14 @@ def print_image(image):
 
 def pad_image(image, iteration):
     if iteration % 2 == 1:
-        new_char = 'True'
+        new_char = '1'
     else:
         new_char = '0'
 
-    new_image = list()
-    blank_line = new_char * len(image[0])
-    new_image.append(blank_line)
-    new_image.append(blank_line)
-    for line in image:
-        new_image.append(line)
-    new_image.append(blank_line)
-    new_image.append(blank_line)
-
-    padded = [new_char + new_char + line + new_char + new_char for line in new_image]
-    return padded
+    image = [new_char + line + new_char for line in image]
+    image.insert(0, '')
+    image.append('')
+    return image
 
 
 def q1(iterations):
@@ -66,7 +59,7 @@ def q1(iterations):
         image = pad_image(image, iteration)
         for r in range(len(image)):
             line = ''
-            for c in range(len(image[0])):
+            for c in range(len(image[1])):
                 value = get_value(image, r, c, iteration)
                 new_value = enhancement[value]
                 line += new_value
