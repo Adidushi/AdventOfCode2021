@@ -1,19 +1,18 @@
-from os.path import sep
-
-def calc_consumption(distance):
-    return int(distance * (distance + 1) / 2)
-
 def q1():
-    with open(f'day 7{sep}input.txt', 'r') as f:
-        input = list(map(int, f.read().strip().split(',')))
+    with open('day 07\input.txt', 'r') as f:
+        input = f.read()
+        # input = list(map(int, input.strip().split(',')))
 
-    return min([sum([abs(num - pos) for num in input]) for pos in range(min(input), max(input))])
-    
+    return min([sum([abs(num - pos) for num in list(map(int, input.strip().split(',')))]) for pos in range(min(list(map(int, input.strip().split(',')))), max(list(map(int, input.strip().split(',')))))])
+
+
 def q2():
-    with open(f'day 7{sep}input.txt', 'r') as f:
-        input = list(map(int, f.read().strip().split(',')))
+    with open('day 07\input.txt', 'r') as f:
+        input = f.read()
+        # input = list(map(int, f.read().strip().split(',')))
 
-    return min([sum([calc_consumption(abs(num - pos)) for num in input]) for pos in range(min(input), max(input))])
+    return min([sum([int(abs(num - pos) * (abs(num - pos) + 1) / 2) for num in list(map(int, input.strip().split(',')))]) for pos in range(min(list(map(int, input.strip().split(',')))), max(list(map(int, input.strip().split(',')))))])
+
 
 if __name__ == '__main__':
     from time import perf_counter
