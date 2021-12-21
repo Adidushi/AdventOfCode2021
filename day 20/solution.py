@@ -7,9 +7,9 @@ def parse(raw_input):
     image.append(blank_line)
 
     for index in range(len(image)):
-        image[index] = image[index].replace('.', '0').replace('#', '1')
+        image[index] = list(image[index].replace('.', '0').replace('#', '1'))
 
-    return enhancement, image
+    return enhancement, list(image)
 
 
 def get_value(input, r, c, iteration):
@@ -40,11 +40,10 @@ def print_image(image):
 
 def pad_image(image, iteration):
     if iteration % 2 == 1:
-        new_char = '1'
+        new_char = list('1')
     else:
-        new_char = '0'
-
-    image = [new_char + line + new_char for line in image]
+        new_char = list('0')
+    image = [new_char + list(line) + new_char for line in image]
     image.insert(0, '')
     image.append('')
     return image
@@ -61,17 +60,11 @@ def q1(iterations):
             line = ''
             for c in range(len(image[1])):
                 value = get_value(image, r, c, iteration)
-                new_value = enhancement[value]
-                line += new_value
+                line += enhancement[value]
             new_image.append(line)
         image = new_image
 
     return ''.join(image).count('1')
-
-
-def q2():
-    with open('day 20\input.txt', 'r') as f:
-        input = f.read().splitlines()
 
 
 if __name__ == '__main__':
