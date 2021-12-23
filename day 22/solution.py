@@ -2,16 +2,21 @@ import itertools
 from dataclasses import dataclass
 from math import prod
 
+
 def contains_all(big_cube, small_cube) -> bool:
     pass
 
+
 def intersects(cube_1, cube_2) -> bool:
     for coord in cube_2.x:
-        if cube_1.x[0] <= coord <= cube_1.x[1]: return True
+        if cube_1.x[0] <= coord <= cube_1.x[1]:
+            return True
     for coord in cube_2.y:
-        if cube_1.y[0] <= coord <= cube_1.y[1]: return True
+        if cube_1.y[0] <= coord <= cube_1.y[1]:
+            return True
     for coord in cube_2.z:
-        if cube_1.z[0] <= coord <= cube_1.z[1]: return True
+        if cube_1.z[0] <= coord <= cube_1.z[1]:
+            return True
     return False
 
 
@@ -33,17 +38,21 @@ class Cube:
 
     def intersects(self, other):
         for coord in other.x:
-            if self.x[0] <= coord <= self.x[1]: return True
+            if self.x[0] <= coord <= self.x[1]:
+                return True
         for coord in other.y:
-            if self.y[0] <= coord <= self.y[1]: return True
+            if self.y[0] <= coord <= self.y[1]:
+                return True
         for coord in other.z:
-            if self.z[0] <= coord <= self.z[1]: return True
+            if self.z[0] <= coord <= self.z[1]:
+                return True
         return False
-    
+
+    def contains_all(self, other):
+        return self.x[0] <= other.x[0] <= other.x[1] <= self.x[1] and self.y[0] <= other.y[0] <= other.y[1] <= self.y[1] and self.z[0] <= other.z[0] <= other.z[1] <= self.z[1]
+
     def split(self, other):
         pass
-
-        
 
 
 def create_matrix() -> dict:
@@ -53,6 +62,7 @@ def create_matrix() -> dict:
             for z in range(-50, 51):
                 cube_matrix[(x, y, z)] = False
     return cube_matrix
+
 
 def parse_input_q1(input):
 
@@ -84,7 +94,8 @@ def q1():
     commands = parse_input_q1(input)
     for command in commands:
         for coord in itertools.product(command['x'], command['y'], command['z']):
-            cube_matrix.add(coord) if command['value'] else cube_matrix.discard(coord)
+            cube_matrix.add(
+                coord) if command['value'] else cube_matrix.discard(coord)
 
     return len(cube_matrix)
 
@@ -123,7 +134,8 @@ def q2():
         counter += 1
         print(counter)
         for coord in itertools.product(command['x'], command['y'], command['z']):
-            cube_matrix.add(coord) if command['value'] else cube_matrix.discard(coord)
+            cube_matrix.add(
+                coord) if command['value'] else cube_matrix.discard(coord)
 
     return len(cube_matrix)
 
