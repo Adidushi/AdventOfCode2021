@@ -1,4 +1,4 @@
-This repository is my progress with the [2021 Advent of Code](https://adventofcode.com/)
+This repository is my progress with the [2021 Advent of Code](https://adventofcode.com/2021)
 
 <!--- advent_readme_stars table --->
 ## 2021 Results
