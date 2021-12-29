@@ -1,9 +1,5 @@
 This repository is my progress with the [2021 Advent of Code](https://adventofcode.com/)
 
-![]((?<=https:\/\/img\.shields\.io\/badge\/day%20📅-)[0-9]+(?=-blue))
-![]((?<=https:\/\/img\.shields\.io\/badge\/stars%20⭐-)[0-9]+(?=-yellow))
-![]((?<=https:\/\/img\.shields\.io\/badge\/days%20completed-)[0-9]+(?=-red))
-
 <!--- advent_readme_stars table --->
 ## 2021 Results
 
